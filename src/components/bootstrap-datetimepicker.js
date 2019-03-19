@@ -289,6 +289,19 @@
       }
       return res.concat((render ? render : []));
     };
+    this.onRenderSecond = function (date) {
+      var render = (options.onRenderSecond || function () { return []; })(date);
+      var res = ['second'];
+      if (typeof render === 'string') {
+        render = [render];
+      }
+      if (date < this.startDate || date > this.endDate) {
+        res.push('disabled');
+      } else if (Math.floor(this.date.getUTCMinutes() / this.minuteStep) === Math.floor(date.getUTCMinutes() / this.minuteStep)) {
+        res.push('active');
+      }
+      return res.concat((render ? render : []));
+    };
     this.onRenderYear = function (date) {
       var render = (options.onRenderYear || function () { return []; })(date);
       var res = ['year'];
